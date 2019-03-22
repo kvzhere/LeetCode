@@ -1,0 +1,49 @@
+public class Solution {
+    public IList<string> LetterCombinations(string digits) {
+        
+        List<string> result = new List<string>();
+
+            digits = digits.Trim();
+
+            Dictionary<char, string> dict = new Dictionary<char, string>();
+            dict.Add('2', "abc");
+            dict.Add('3', "def");
+            dict.Add('4', "ghi");
+            dict.Add('5', "jkl");
+            dict.Add('6', "mno");
+            dict.Add('7', "pqrs");
+            dict.Add('8', "tuv");
+            dict.Add('9', "wxyz");
+
+
+            foreach(char letter in digits)
+            {
+                List<String> newlist = new List<String>();
+                foreach (char s in dict[letter])
+                {
+                    newlist.Add(s.ToString());
+                }
+                if(result.Count()==0)
+                {
+                    foreach(String s in newlist)
+                    {
+                        result.Add(s);
+                    }                    
+                }
+                else
+                {
+                    List<String> curlist = new List<String>();
+                    foreach(String s in result)
+                    {
+                        foreach(String s1 in newlist)
+                        {
+                            curlist.Add(s+s1);
+                        }
+                    } 
+                    result.Clear();
+                    result.AddRange(curlist);
+                }
+            }
+        return result;
+    }
+}
